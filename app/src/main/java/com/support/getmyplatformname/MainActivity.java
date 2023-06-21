@@ -41,8 +41,13 @@ public class MainActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.textView);
 
         // use Mason Framework to get device IMEI number for use in PlatformName API call
-        di = MasonFramework.get(getBaseContext(), DeviceIdentifiers.class);
-        imei = di.getIMEI(0);
+        // Mason security exception will be caught if running locally in
+        try{
+            di = MasonFramework.get(getBaseContext(), DeviceIdentifiers.class);
+            imei = di.getIMEI(0);
+        }catch(Exception e){
+            imei = "123456789";
+        }
     }
 
     private View.OnClickListener mButtonListener = new View.OnClickListener() {
